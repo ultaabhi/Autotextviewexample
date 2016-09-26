@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <title>stock </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="res.css">
+
+
+    <!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">-->
+    <!--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>-->
+    <!-- Optional Bootstrap theme -->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="http://markitondemand.github.io/DataApis/InteractiveChartSample/resources/InteractiveChartApi.js"></script>
+
+
+
+
+    <script>
+
+function highfunc(txt)
+       /* $(document).ready(function()*/{
+
+            $.ajax({
+                        data: {
+                                            highSymbol:txt
+
+
+                                        },
+                                        url: "http://webstock-env.us-west-2.elasticbeanstalk.com/",
+                                        dataType: "json",
+                                        /*context: this,*/
+                                        success: function(json){
+                                            $graphSymbol=txt
+                                            var j=JSON.parse(json);
+
+                                            var volume =Markit.InteractiveChartApi.prototype._getVolume(j);
+                                            var ohlc=Markit.InteractiveChartApi.prototype._getOHLC(j);
+
+                                             var groupingUnits = [[
+                                                          'week',                         // unit name
+                                                          [1]                             // allowed multiples
+                                                      ], [
+                                                          'month',
+                                                          [1, 2, 3, 4, 6]
+                                                      ]];
+                                           $('#Charts').highcharts('StockChart', {
+
+                                             xAxis: {
+                                                    dateTimeLabelFormats: {
+                                                            hour: '%e. %b<br><span style="font-size: 8px">%H:%M</span>'
+                                                    }
+                                            },
+                                               exporting: { enabled: false },
+
+                                        rangeSelector: {
+                                                allButtonsEnabled: true,
+                                                buttons: [{
+
+                                                type: 'week',
+                                                count: 1,
+                                                text: '1w'
+                                        }, {
+                                                type: 'month',
+                                                count: 1,
+                                                text: '1m'
+                                        }, {
+                                                type: 'month',
+                                                count: 3,
+                                                text: '3m'
+                                        }, {
+                                                type: 'month',
+                                                count: 6,
+                                                text: '6m'
+                                        }, {
+                                                type: 'ytd',
+                                                text: 'YTD'
+                                        }, {
+                                                type: 'year',
+                                                count: 1,
+                                                text: '1y'
+                                        }, {
+                                                type: 'all',
+                                                text: 'All'
+                                        }],
+                                        selected: 0,
+                                        inputEnabled: false
+                                        },
+                                        title: {
+                                            text: txt + ' Stock Value '
+                                        },
+                                        yAxis: {
+
+                                            title: {
+
+                                                    text: 'Stock Value',
+
+                                            }
+                                        },
+                                        series: [{
+                                            name: txt+ ' Stock Value $',
+                                            data: ohlc,
+                                            type: 'area',
+                                            threshold: null,
+                                            tooltip: {
+                                                    valueDecimals: 2
+                                            },
+                                            fillColor: {
+                                                    linearGradient: {
+                                                            x1: 0,
+                                                            y1: 0,
+                                                            x2: 0,
+                                                            y2: 1
+                                                    },
+                                                    stops: [
+                                            [0, Highcharts.getOptions().colors[0]],
+                                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                        ]
+                                        }
+                                        }]
+                                                            });
+
+                                        },
+                                        error: function(response,txtStatus){
+                                            console.log(response,txtStatus)
+                                            }
+                                    });
+
+
+        }
+    </script>
+</head>
+<body>
+<div id="Charts"></div></body>
+</html>
