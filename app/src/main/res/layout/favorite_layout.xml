@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="AAPL"
+        android:id="@+id/favSymbol"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18dp"
+        android:text="1.2%"
+        android:id="@+id/favCurrPrice"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="$109.21"
+        android:textSize="18dp"
+        android:id="@+id/favChange"
+        android:layout_toLeftOf="@+id/favCurrPrice"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/favMarketCap"
+        android:layout_alignStart="@+id/favMarketCap" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:paddingRight="3px"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Apple Inc."
+        android:id="@+id/favCompName"
+        android:layout_below="@+id/favSymbol"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Marketcap: $6 Billion"
+        android:id="@+id/favMarketCap"
+        android:layout_below="@+id/favCurrPrice"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
